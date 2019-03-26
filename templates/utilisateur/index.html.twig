@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Utilisateurs{% endblock %}
+
+{% block contenu %}
+    <h1 class="h3 mb-3 offset-1">Liste des Utilisateurs - <a href='{{path('utilisateur_ajout')}}'>Ajouter un Utilisateur</a></h1>
+    <div class="table-responsive offset-1">
+        {{ form_start(form)}}
+        <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Login</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Adresse</th>
+                <th scope="col">Téléphone</th>
+                <th></th>
+            </tr>
+        </thead>
+        {% if not liste is empty %}
+            <tbody>
+            {% for u in liste %}
+                <tr scope="row">
+                    <td><a href="{{ path('utilisateur_modifier',{'id':u.id})}}">{{u.login}}</a></th>
+                    <td>{{u.nom}}</td>
+                    <td>{{u.prenom}}</td>
+                    <td>{{u.adresse}}</td>
+                    <td>{{u.telephone}}</td>
+                    <td><input type="checkbox" name="cocher[]"  value="{{u.id}}"/></td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr><td>Aucun utilisateur à afficher</td></tr>
+        {% endif %}
+        </tbody>
+        </table>
+        {{ form_widget(form.save) }}
+        {{ form_end(form)}}
+     </div>
+{% endblock %}

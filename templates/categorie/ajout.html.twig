@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une Catégories{% endblock %}
+
+{% block contenu %}
+<div align="center">
+        <h1 class="h3 mb-3 font-weight-normal">Ajout d'une catégorie</h1>
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div class="form-row">
+        {{ form_label(form.libelle, 'Libellé:', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        <div class="form-row">
+          {{ form_errors(form.libelle) }}
+          {{ form_widget(form.libelle) }}
+          {{ form_help(form.libelle) }}
+        </div>  
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            {{ form_widget(form.save) }}
+        </div>
+    </div>
+        <input type="hidden" id="form__token" name="form[_token]" value="Rt5KAlurW04xwwW9tuwHpfvxObmNrfhR0cI7zkXV38I" />    
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

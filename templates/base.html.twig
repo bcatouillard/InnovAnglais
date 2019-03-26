@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title> InnovAnglais -  {% block title %}{% endblock %}</title>
+        <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
+        <link href="{{asset('css/style.css')}}" rel="stylesheet">
+        <link rel="icon" type="image/png" href="{{asset('images/innovanglais2.png')}}"/>
+        {% block style %} {% endblock %}
+    </head>  
+    <body class="bg-light">
+        
+        {% block body %}
+            
+            <!-- navBar -->
+            
+            <nav class="navbar navbar-expand-lg">
+                
+                <a class="navbar-brand" href="{{path('accueil')}}"> <img alt="Brand" src="{{asset('images/innovanglais2.png')}}" class="img-circle" /> </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{path('accueil')}}">Accueil</a>
+                        </li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Administration
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{path('entreprise')}}">Gestion des entreprises</a>
+                                    <a class="dropdown-item" href="{{path('vocabulaire')}}">Gestion du vocabulaire</a>
+                                    <a class="dropdown-item" href="{{path('utilisateur')}}">Gestion des utilisateurs</a>
+                                    <a class="dropdown-item" href="{{path('theme')}}">Gestion des thèmes</a>
+                                    <a class="dropdown-item" href="{{path('categorie')}}">Gestion des catégories</a>
+                                </div>
+                            </li>
+                       {% endif %}
+                       
+                    </ul>
+                    <div class="my-2 my-lg-0">
+                        <ul class="navbar-nav mr-auto">
+                            <ul class="navbar-nav mr-auto">
+                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li><a class="nav-item nav-link" href="{{ path('inscrire') }}">S'inscrire</a></li>
+                        <li><a class="nav-item nav-link" href="{{ path('app_login') }}">Se connecter</a></li>
+                    {% else %}  
+                        <li><a class="nav-item nav-link" href="{{ path('app_logout') }}">Se déconnecter</a></li>
+                    {% endif %}
+                            </ul>
+                        </ul>
+                    </div>
+                </div>
+                
+            </nav>
+                            
+        <div class="row" >
+            <div class="center-block col-md-10" style="float:none"> 
+            {% block contenu %}{% endblock %} 
+            </div>
+        </div>  
+        {% endblock %}  
+    {% block js %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{{ asset('js/jquery.min.css') }}">')</script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/dropdown.js') }}"></script>
+    <script src="{{ asset('js/npm.js') }}"></script>{% endblock %}
+    </body>
+</html>
